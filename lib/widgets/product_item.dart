@@ -1,10 +1,11 @@
-
 import 'package:fashoinstore/constants/colors.dart';
+import 'package:fashoinstore/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 
 class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
+  const ProductItem({super.key, required this.productModel});
+ final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +19,10 @@ class ProductItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset('assets/product/product1.png'),
+          Image.asset(productModel.image),
           Gap(8),
           Text(
-            'October collection',
+        productModel.title,
             style: TextStyle(
               fontFamily: 'TenorSans',
               fontSize: 12,
@@ -30,7 +31,7 @@ class ProductItem extends StatelessWidget {
             ),
           ),
           Text(
-            'reversible angora cardigan',
+            productModel.description,
             style: TextStyle(
               fontFamily: 'TenorSans',
               fontSize: 12,
@@ -39,7 +40,7 @@ class ProductItem extends StatelessWidget {
             ),
           ),
           Text(
-            r'$120',
+            r'$' + productModel.price.toString(),
             style: TextStyle(
               fontFamily: 'TenorSans',
               fontSize: 15,

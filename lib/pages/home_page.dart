@@ -1,4 +1,5 @@
 import 'package:fashoinstore/constants/colors.dart';
+import 'package:fashoinstore/models/product_model.dart';
 import 'package:fashoinstore/widgets/customAppBar.dart';
 import 'package:fashoinstore/widgets/product_item.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+   HomePage({super.key});
+  final List<ProductModel> products = ProductModel.products;
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +61,17 @@ class HomePage extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: 6,
-                   // scrollDirection: Axis.vertical,
+                    // scrollDirection: Axis.vertical,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 1/1.8,
+                      childAspectRatio: 1 / 1.8,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                     ),
                     itemBuilder: (context, index) {
-                      return const ProductItem();
+                      return ProductItem(
+                        productModel: products[index],
+                      );
                     },
                   ),
                 ],
@@ -79,4 +83,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
