@@ -1,5 +1,6 @@
 import 'package:fashoinstore/constants/colors.dart';
 import 'package:fashoinstore/widgets/customAppBar.dart';
+import 'package:fashoinstore/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
@@ -54,7 +55,21 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   Gap(20),
-                  ProductItem(),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 6,
+                   // scrollDirection: Axis.vertical,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1/1.8,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                    ),
+                    itemBuilder: (context, index) {
+                      return const ProductItem();
+                    },
+                  ),
                 ],
               ),
             ),
@@ -65,52 +80,3 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 285,
-      width: 165,
-      decoration: BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset('assets/product/product1.png'),
-          Gap(8),
-          Text(
-            'October collection',
-            style: TextStyle(
-              fontFamily: 'TenorSans',
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
-            ),
-          ),
-          Text(
-            'reversible angora cardigan',
-            style: TextStyle(
-              fontFamily: 'TenorSans',
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
-            ),
-          ),
-          Text(
-            r'$120',
-            style: TextStyle(
-              fontFamily: 'TenorSans',
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-              color: Color(0xffDD8560),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
