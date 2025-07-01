@@ -1,5 +1,6 @@
 import 'package:fashoinstore/constants/colors.dart';
 import 'package:fashoinstore/models/product_model.dart';
+import 'package:fashoinstore/widgets/collection_product.dart';
 import 'package:fashoinstore/widgets/customAppBar.dart';
 import 'package:fashoinstore/widgets/product_item.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomePage extends StatelessWidget {
-   HomePage({super.key});
+  HomePage({super.key});
   final List<ProductModel> products = ProductModel.products;
 
   @override
@@ -61,7 +62,6 @@ class HomePage extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: 6,
-                    // scrollDirection: Axis.vertical,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 1 / 1.8,
@@ -69,10 +69,31 @@ class HomePage extends StatelessWidget {
                       mainAxisSpacing: 10,
                     ),
                     itemBuilder: (context, index) {
-                      return ProductItem(
-                        productModel: products[index],
-                      );
+                      return ProductItem(productModel: products[index]);
                     },
+                  ),
+                  Gap(15),
+                  Text(
+                    'You may also like'.toUpperCase(),
+                    style: TextStyle(
+                      color: Color(0xffFCFCFC),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Gap(5),
+                  Image.asset('assets/svgs/line.png', width: 85),
+                  Gap(10),
+                  SizedBox(
+                    height: 400,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return CollectionProduct();
+                      },
+                    ),
                   ),
                 ],
               ),
