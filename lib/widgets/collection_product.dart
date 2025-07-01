@@ -1,8 +1,10 @@
+import 'package:fashoinstore/models/collection_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 
 class CollectionProduct extends StatelessWidget {
-  const CollectionProduct({super.key});
+  const CollectionProduct({super.key, required this.collection});
+  final CollectionModel collection;
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +16,13 @@ class CollectionProduct extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.asset(
-              'assets/Cover/cover1.png',
+              collection.image,
               height: 300,
               fit: BoxFit.cover,
             ),
             Gap(5),
             Text(
-              'Black collection'.toUpperCase(),
+              collection.title.toUpperCase(),
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,

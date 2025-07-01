@@ -1,4 +1,5 @@
 import 'package:fashoinstore/constants/colors.dart';
+import 'package:fashoinstore/models/collection_model.dart';
 import 'package:fashoinstore/models/product_model.dart';
 import 'package:fashoinstore/widgets/collection_product.dart';
 import 'package:fashoinstore/widgets/customAppBar.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_svg/svg.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final List<ProductModel> products = ProductModel.products;
+  final List<CollectionModel> collections = CollectionModel.collections;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +93,9 @@ class HomePage extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       itemCount: 3,
                       itemBuilder: (context, index) {
-                        return CollectionProduct();
+                        return CollectionProduct(
+                          collection: collections[index],
+                        );
                       },
                     ),
                   ),
