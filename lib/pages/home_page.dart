@@ -3,10 +3,12 @@ import 'package:fashoinstore/models/collection_model.dart';
 import 'package:fashoinstore/models/product_model.dart';
 import 'package:fashoinstore/widgets/collection_product.dart';
 import 'package:fashoinstore/widgets/customAppBar.dart';
+import 'package:fashoinstore/widgets/home_footer.dart';
 import 'package:fashoinstore/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:kmbal_ionicons/kmbal_ionicons.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -99,6 +101,7 @@ class HomePage extends StatelessWidget {
                       },
                     ),
                   ),
+                  HomeFooter(),
                 ],
               ),
             ),
@@ -108,3 +111,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+

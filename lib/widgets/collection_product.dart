@@ -24,6 +24,7 @@ class CollectionProduct extends StatelessWidget {
             Text(
               collection.title.toUpperCase(),
               style: TextStyle(
+                color: Color(0xff555555),
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 fontFamily: 'Tenor Sans',
