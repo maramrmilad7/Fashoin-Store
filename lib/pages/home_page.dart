@@ -8,10 +8,10 @@ import 'package:fashoinstore/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kmbal_ionicons/kmbal_ionicons.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
+  static String id = 'homePage';
   final List<ProductModel> products = ProductModel.products;
   final List<CollectionModel> collections = CollectionModel.collections;
 
@@ -68,12 +68,21 @@ class HomePage extends StatelessWidget {
                     itemCount: 6,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      childAspectRatio: 1 / 1.8,
+                      childAspectRatio: 1 / 1.9,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                     ),
                     itemBuilder: (context, index) {
-                      return ProductItem(productModel: products[index]);
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            'checkoutPage',
+                            arguments: products[index],
+                          );
+                        },
+                        child: ProductItem(productModel: products[index]),
+                      );
                     },
                   ),
                   Gap(15),
@@ -111,4 +120,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
