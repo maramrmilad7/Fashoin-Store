@@ -1,3 +1,5 @@
+import 'package:fashoinstore/constants/colors.dart';
+import 'package:fashoinstore/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class HeaderOfCheckout extends StatelessWidget {
@@ -8,14 +10,13 @@ class HeaderOfCheckout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          title.toUpperCase(),
-          style: TextStyle(
-            fontSize: 30,
-            fontFamily: 'Tenor Sans',
-            fontWeight: FontWeight.w300,
-          ),
+        CustomText(
+          text: title.toUpperCase(),
+          size: 30,
+          weight: FontWeight.w300,
+          color: AppColors.primary,
         ),
+
         Image.asset('assets/svgs/line.png', color: Colors.black, width: 140),
       ],
     );
