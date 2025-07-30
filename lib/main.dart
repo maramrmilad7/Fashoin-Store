@@ -1,6 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:fashoinstore/pages/checkout_page.dart';
 import 'package:fashoinstore/pages/home_page.dart';
+import 'package:fashoinstore/pages/place_order.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +18,7 @@ class FashoinApp extends StatelessWidget {
       routes: {
         'homePage': (context) => HomePage(), 
         'checkoutPage': (context) => CheckoutPage(),
+        'placeOrderPage': (context) => PlaceOrderPage(),
       },
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,

@@ -84,7 +84,7 @@ class _CartState extends State<Cart> {
 
                       // Total price
                       Text(
-                        '\$${(product.price * quantity).toStringAsFixed(2)}',
+                        '\$${(product.price).toStringAsFixed(2)}',
                         style: const TextStyle(
                           color: Color(0xffDD8560),
                           fontSize: 16,
@@ -183,7 +183,7 @@ class _CartState extends State<Cart> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Est. Total',
+                'Total'.toUpperCase(),
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w400,

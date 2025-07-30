@@ -16,12 +16,12 @@ class CheckoutPage extends StatefulWidget {
 }
 
 class _CheckoutPageState extends State<CheckoutPage> {
- // int quantity =0; // Counter for product quantity
+  // int quantity =0; // Counter for product quantity
 
   @override
   Widget build(BuildContext context) {
-    final ProductModel product =
-        ModalRoute.of(context)!.settings.arguments as ProductModel;
+    //  final ProductModel product =
+    //     ModalRoute.of(context)!.settings.arguments as ProductModel;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CustomAppBar(isBlack: false),
@@ -29,10 +29,14 @@ class _CheckoutPageState extends State<CheckoutPage> {
         children: [
           HeaderOfCheckout(title: 'Checkout'),
           Cart(),
-        
         ],
       ),
-      bottomNavigationBar: CheckOutBox(title: 'checkout'),
+      bottomNavigationBar: GestureDetector(
+        onTap: (){
+          Navigator.pushNamed(context, 'placeOrderPage');
+        },
+        
+        child: CheckOutBox(title: 'checkout')),
     );
   }
 }
