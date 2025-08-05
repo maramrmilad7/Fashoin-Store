@@ -56,7 +56,7 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final ProductModel product = args['product'];
+    //  final ProductModel product = args['product'];
     final double totalPrice = args['totalPrice'];
 
     return Scaffold(
@@ -145,14 +145,19 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
           Padding(
             padding: const EdgeInsets.only(left: 8, top: 8),
             child: CustomText(
-              text: 'paymentsss method'.toUpperCase(),
+              text: 'payment method'.toUpperCase(),
               size: 16,
               color: Color(0xff888888),
             ),
           ),
-          CustomTextFeild(
-            title: 'select payment method',
-            icon: Icons.arrow_drop_down,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, 'addCardPage');
+            },
+            child: CustomTextFeild(
+              title: 'select payment method',
+              icon: Icons.arrow_drop_down,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 5, right: 5, top: 200),
