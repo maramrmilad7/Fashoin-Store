@@ -1,12 +1,17 @@
 import 'package:fashoinstore/models/product_model.dart';
+import 'package:fashoinstore/pages/add_card_page.dart';
 import 'package:fashoinstore/pages/add_shipping_address.dart';
 import 'package:fashoinstore/widgets/CheckOutBox.dart';
+import 'package:fashoinstore/widgets/cart.dart';
 import 'package:fashoinstore/widgets/customAppBar.dart';
 import 'package:fashoinstore/widgets/custom_text.dart';
 import 'package:fashoinstore/widgets/customtextfeild.dart';
+import 'package:fashoinstore/widgets/dialog.dart';
 import 'package:fashoinstore/widgets/header.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PlaceOrderPage extends StatefulWidget {
   const PlaceOrderPage({super.key});
@@ -17,6 +22,7 @@ class PlaceOrderPage extends StatefulWidget {
 
 class _PlaceOrderPageState extends State<PlaceOrderPage> {
   dynamic _savedAddress;
+  dynamic _savedPaymentCard;
   late int selectedQty;
 
   @override
@@ -52,11 +58,21 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
     });
   }
 
+  //open payment card
+  void openPaymentCard() async {
+    final carddata = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (c) => AddCardPage()),
+    );
+    if (carddata != null) {
+      _savedPaymentCard = carddata;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    //  final ProductModel product = args['product'];
     final double totalPrice = args['totalPrice'];
 
     return Scaffold(
@@ -68,14 +84,15 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
           Center(child: HeaderOfCheckout(title: 'Checkout')),
           Padding(
             padding: const EdgeInsets.only(left: 8, top: 8),
-            child: CustomText(
-              text: 'Shipping adress'.toUpperCase(),
-              size: 16,
-              color: Color(0xff888888),
-            ),
+            child: _savedAddress == null
+                ? CustomText(
+                    text: 'Shipping adress'.toUpperCase(),
+                    size: 16,
+                    color: Color(0xff888888),
+                  )
+                : SizedBox.shrink(),
           ),
           Gap(8),
-          //   AdressInfo(),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -131,36 +148,78 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 8, top: 8),
-            child: CustomText(
-              text: 'Shipping method'.toUpperCase(),
-              size: 16,
-              color: Color(0xff888888),
-            ),
+            child: _savedPaymentCard != null && _savedAddress != null
+                ? SizedBox.shrink()
+                : CustomText(
+                    text: 'Shipping method'.toUpperCase(),
+                    size: 16,
+                    color: Color(0xff888888),
+                  ),
           ),
-          CustomTextFeild(
-            title: 'Pickup at store',
-            icon: Icons.arrow_drop_down,
-          ),
+          _savedPaymentCard != null && _savedAddress != null
+              ? SizedBox.shrink()
+              : CustomTextFeild(
+                  title: 'Pickup at store',
+                  icon: Icons.arrow_drop_down,
+                ),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 8, top: 8),
-            child: CustomText(
-              text: 'payment method'.toUpperCase(),
-              size: 16,
-              color: Color(0xff888888),
-            ),
+            child: _savedPaymentCard == null
+                ? CustomText(
+                    text: 'payment method'.toUpperCase(),
+                    size: 16,
+                    color: Color(0xff888888),
+                  )
+                : SizedBox.shrink(),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, 'addCardPage');
-            },
-            child: CustomTextFeild(
-              title: 'select payment method',
-              icon: Icons.arrow_drop_down,
-            ),
-          ),
+          _savedPaymentCard != null
+              ? Column(
+                  children: [
+                    Divider(color: Colors.grey.shade300),
+                    Gap(20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/svgs/Mastercard.svg',
+                            width: 40,
+                          ),
+                          Gap(10),
+                          CustomText(
+                            text: 'Master Card Ending',
+                            color: Colors.black,
+                          ),
+                          Gap(10),
+                          CustomText(
+                            text:
+                                '••••${_savedPaymentCard['number'].toString().substring(_savedPaymentCard['number'].length - 2)}',
+                            color: Colors.black,
+                          ),
+                          Spacer(),
+                          SvgPicture.asset('assets/svgs/arrow.svg'),
+                        ],
+                      ),
+                    ),
+                    Gap(20),
+                    Divider(color: Colors.grey.shade300),
+                  ],
+                )
+              : GestureDetector(
+                  onTap: () {
+                    openPaymentCard();
+                  },
+                  child: CustomTextFeild(
+                    title: 'select payment method',
+                    icon: Icons.arrow_drop_down,
+                  ),
+                ),
+
           Padding(
-            padding: const EdgeInsets.only(left: 5, right: 5, top: 200),
+            padding: _savedAddress != null && _savedPaymentCard != null
+                ? const EdgeInsets.only(left: 5, right: 5, top: 300)
+                : EdgeInsets.only(left: 5, right: 5, top: 200),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,10 +246,19 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
         ],
       ),
       bottomNavigationBar: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) {
+              return Dialog(child: CustomDailog());
+            },
+          );
+        },
 
         child: CheckOutBox(title: 'Place Order'),
       ),
     );
   }
 }
+

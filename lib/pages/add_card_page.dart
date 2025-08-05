@@ -22,44 +22,61 @@ class _AddCardPageState extends State<AddCardPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(isBlack: false),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              Center(child: HeaderOfCheckout(title: 'Payment Method')),
-              Gap(2),
-              CreditCardWidget(
-                padding: 6,
-                cardNumber: cardNumber,
-                expiryDate: expiryDate,
-                cardHolderName: cardHolderName,
-                cvvCode: cvvCode,
-                showBackView: isShow,
-                onCreditCardWidgetChange: (v) {},
-                cardBgColor: Color(0xff505664),
-                obscureCardCvv: false,
-                obscureCardNumber: true,
-                isHolderNameVisible: true,
-              ),
-              CreditCardForm(
-                cardNumber: cardNumber,
-                expiryDate: expiryDate,
-                cardHolderName: cardHolderName,
-                cvvCode: cvvCode,
-                onCreditCardModelChange: onCreditCardModelChange,
-                formKey: _formKey,
-              ),
-            ],
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus(); // Dismiss the keyboard
+      },
+      child: Scaffold(
+        appBar: CustomAppBar(isBlack: false),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                Center(child: HeaderOfCheckout(title: 'Payment Method')),
+                Gap(2),
+                CreditCardWidget(
+                  padding: 6,
+                  cardNumber: cardNumber,
+                  expiryDate: expiryDate,
+                  cardHolderName: cardHolderName,
+                  cvvCode: cvvCode,
+                  showBackView: isShow,
+                  onCreditCardWidgetChange: (v) {},
+                  cardBgColor: Color(0xff505664),
+                  obscureCardCvv: false,
+                  obscureCardNumber: true,
+                  isHolderNameVisible: true,
+                ),
+                CreditCardForm(
+                  cardNumber: cardNumber,
+                  expiryDate: expiryDate,
+                  cardHolderName: cardHolderName,
+                  cvvCode: cvvCode,
+                  onCreditCardModelChange: onCreditCardModelChange,
+                  formKey: _formKey,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-       bottomNavigationBar: GestureDetector(
-        onTap: () {},
+         bottomNavigationBar: GestureDetector(
+          onTap: () {
+            if(_formKey.currentState!.validate()){
+               final data = {
+                          'number' : cardNumber,
+                          'name' : cardHolderName,
+                          'date' : expiryDate,
+                          'cvv' : cvvCode,
+                        };
 
-        child: CheckOutBox(title: 'Add Cart'),
+                        Navigator.pop(context,data);
+                      
+            }
+          },
+      
+          child: CheckOutBox(title: 'Add Cart'),
+        ),
       ),
     );
   }
