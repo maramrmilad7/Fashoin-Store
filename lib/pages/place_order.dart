@@ -1,6 +1,6 @@
 import 'package:fashoinstore/models/product_model.dart';
+import 'package:fashoinstore/pages/add_shipping_address.dart';
 import 'package:fashoinstore/widgets/CheckOutBox.dart';
-import 'package:fashoinstore/widgets/addressinfo.dart';
 import 'package:fashoinstore/widgets/customAppBar.dart';
 import 'package:fashoinstore/widgets/custom_text.dart';
 import 'package:fashoinstore/widgets/customtextfeild.dart';
@@ -8,8 +8,49 @@ import 'package:fashoinstore/widgets/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 
-class PlaceOrderPage extends StatelessWidget {
+class PlaceOrderPage extends StatefulWidget {
   const PlaceOrderPage({super.key});
+
+  @override
+  State<PlaceOrderPage> createState() => _PlaceOrderPageState();
+}
+
+class _PlaceOrderPageState extends State<PlaceOrderPage> {
+  dynamic _savedAddress;
+  late int selectedQty;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  ///open address
+  void _openAddress(context) async {
+    final addressData = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (c) => AddShippingAddress()),
+    );
+
+    if (addressData != null) {
+      setState(() {
+        _savedAddress = addressData;
+      });
+    }
+  }
+
+  //edit address
+  void _editAddress() async {
+    final newAddress = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (c) => AddShippingAddress(editData: _savedAddress),
+      ),
+    );
+
+    setState(() {
+      _savedAddress = newAddress;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +58,6 @@ class PlaceOrderPage extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final ProductModel product = args['product'];
     final double totalPrice = args['totalPrice'];
-    // final  product =
-    //  ModalRoute.of(context)!.settings.arguments as double;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -29,14 +68,66 @@ class PlaceOrderPage extends StatelessWidget {
           Center(child: HeaderOfCheckout(title: 'Checkout')),
           Padding(
             padding: const EdgeInsets.only(left: 8, top: 8),
-            child: CustomText(
-              text: 'Shipping adress'.toUpperCase(),
-              size: 16,
-              color: Color(0xff888888),
-            ),
+            child:  CustomText(
+                    text: 'Shipping adress'.toUpperCase(),
+                    size: 16,
+                    color: Color(0xff888888),
+                  ),
           ),
           Gap(8),
-          AdressInfo(),
+          //   AdressInfo(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _savedAddress != null
+                  ? GestureDetector(
+                      onTap: () => _editAddress(),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: SizedBox(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              CustomText(
+                                text:
+                                    '${_savedAddress['first']} ${_savedAddress['last']}',
+                                color: Color(0xff1A1A1A),
+                                size: 18,
+                                weight: FontWeight.w600,
+                              ),
+                              CustomText(
+                                text:
+                                    '${_savedAddress['address']}\n'
+                                    '${_savedAddress['city']} ${_savedAddress['state']} ${_savedAddress['zip']}',
+                                max: 3,
+                                color: Color(0xff888888),
+                                size: 18,
+                                weight: FontWeight.w200,
+                              ),
+
+                              CustomText(
+                                text: '${_savedAddress['phone']}',
+                                max: 3,
+                                color: Color(0xff888888),
+                                size: 18,
+                                weight: FontWeight.w200,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : _savedAddress == null
+                  ? GestureDetector(
+                      onTap: () => _openAddress(context),
+                      child: CustomTextFeild(
+                        title: 'Add Shipping Address',
+                        icon: Icons.add,
+                      ),
+                    )
+                  : SizedBox.shrink(),
+            ],
+          ),
           Gap(8),
           Padding(
             padding: const EdgeInsets.only(left: 8, top: 8),
@@ -91,9 +182,7 @@ class PlaceOrderPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: GestureDetector(
-        onTap: () {
-          // Navigator.pushNamed(context, 'placeOrderPage');
-        },
+        onTap: () {},
 
         child: CheckOutBox(title: 'Place Order'),
       ),

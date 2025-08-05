@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:fashoinstore/pages/add_shipping_address.dart';
 import 'package:fashoinstore/pages/checkout_page.dart';
 import 'package:fashoinstore/pages/home_page.dart';
 import 'package:fashoinstore/pages/place_order.dart';
@@ -19,6 +20,7 @@ class FashoinApp extends StatelessWidget {
         'homePage': (context) => HomePage(), 
         'checkoutPage': (context) => CheckoutPage(),
         'placeOrderPage': (context) => PlaceOrderPage(),
+        'addShippingAddress': (context) => AddShippingAddress(),
       },
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,

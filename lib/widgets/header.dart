@@ -12,7 +12,7 @@ class HeaderOfCheckout extends StatelessWidget {
       children: [
         CustomText(
           text: title.toUpperCase(),
-          size: 30,
+          size: 26,
           weight: FontWeight.w300,
           color: AppColors.primary,
         ),
