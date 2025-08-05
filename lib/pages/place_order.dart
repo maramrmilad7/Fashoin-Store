@@ -68,11 +68,11 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
           Center(child: HeaderOfCheckout(title: 'Checkout')),
           Padding(
             padding: const EdgeInsets.only(left: 8, top: 8),
-            child:  CustomText(
-                    text: 'Shipping adress'.toUpperCase(),
-                    size: 16,
-                    color: Color(0xff888888),
-                  ),
+            child: CustomText(
+              text: 'Shipping adress'.toUpperCase(),
+              size: 16,
+              color: Color(0xff888888),
+            ),
           ),
           Gap(8),
           //   AdressInfo(),
@@ -155,7 +155,7 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
             icon: Icons.arrow_drop_down,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 5, right: 5, top: 120),
+            padding: const EdgeInsets.only(left: 5, right: 5, top: 200),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,

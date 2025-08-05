@@ -30,7 +30,7 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
   @override
   void initState() {
     if (widget.editData != null) {
-      firstNameController.text = widget.editData['first'] ?? "";
+      firstNameController.text = widget.editData['first'] ?? ""; //to upload data if it in edit mode
       lastNameController.text = widget.editData['last'] ?? "";
       addressController.text = widget.editData['address'] ?? "";
       cityController.text = widget.editData['city'] ?? "";
@@ -42,7 +42,6 @@ class _AddShippingAddressState extends State<AddShippingAddress> {
   }
 
   final TextEditingController firstNameController = TextEditingController();
-
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
