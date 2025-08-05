@@ -18,7 +18,7 @@ class _AddCardPageState extends State<AddCardPage> {
   String cardHolderName = '';
   String cvvCode = '';
   bool isShow = false;
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,13 +48,23 @@ class _AddCardPageState extends State<AddCardPage> {
                 expiryDate: expiryDate,
                 cardHolderName: cardHolderName,
                 cvvCode: cvvCode,
-                onCreditCardModelChange: (v) {},
-                formKey: formKey,
+                onCreditCardModelChange: onCreditCardModelChange,
+                formKey: _formKey,
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void onCreditCardModelChange(CreditCardModel data) {
+    setState(() {
+      cardNumber = data.cardNumber;
+      expiryDate = data.expiryDate;
+      cardHolderName = data.cardHolderName;
+      cvvCode = data.cvvCode;
+      isShow = data.isCvvFocused;
+    });
   }
 }
