@@ -1,3 +1,4 @@
+import 'package:fashoinstore/widgets/CheckOutBox.dart';
 import 'package:fashoinstore/widgets/customAppBar.dart';
 import 'package:fashoinstore/widgets/header.dart';
 import 'package:flutter/material.dart';
@@ -55,10 +56,16 @@ class _AddCardPageState extends State<AddCardPage> {
           ),
         ),
       ),
+       bottomNavigationBar: GestureDetector(
+        onTap: () {},
+
+        child: CheckOutBox(title: 'Add Cart'),
+      ),
     );
   }
 
   void onCreditCardModelChange(CreditCardModel data) {
+    //to connect form with card
     setState(() {
       cardNumber = data.cardNumber;
       expiryDate = data.expiryDate;
