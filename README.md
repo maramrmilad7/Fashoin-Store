@@ -11,4 +11,4 @@ simple store app , The app provides an intuitive interface for completing paymen
 - Add Payment Card
 - Payment Confirmation
 ## Figma link
-[figma](https://www.figma.com/design/CGQpIVfb1nrXbZys9Iwus6/Open-Fashion---Free-eCommerce-UI-Kit--Community-?node-id=417-615&p=f&t=AAUAg2JTH758WFwB-0)
+[figma_fashoin_store_design](https://www.figma.com/design/CGQpIVfb1nrXbZys9Iwus6/Open-Fashion---Free-eCommerce-UI-Kit--Community-?node-id=417-615&p=f&t=AAUAg2JTH758WFwB-0)
