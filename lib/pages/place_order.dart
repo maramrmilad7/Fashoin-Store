@@ -68,6 +68,19 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
       _savedPaymentCard = carddata;
     }
   }
+  //edit payment card
+  void _editPaymentCard() async {
+    final newCard = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (c) => AddCardPage(editData: _savedPaymentCard),
+      ),
+    );
+
+    setState(() {
+      _savedPaymentCard = newCard;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -174,38 +187,41 @@ class _PlaceOrderPageState extends State<PlaceOrderPage> {
                 : SizedBox.shrink(),
           ),
           _savedPaymentCard != null
-              ? Column(
-                  children: [
-                    Divider(color: Colors.grey.shade300),
-                    Gap(20),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/svgs/Mastercard.svg',
-                            width: 40,
-                          ),
-                          Gap(10),
-                          CustomText(
-                            text: 'Master Card Ending',
-                            color: Colors.black,
-                          ),
-                          Gap(10),
-                          CustomText(
-                            text:
-                                '••••${_savedPaymentCard['number'].toString().substring(_savedPaymentCard['number'].length - 2)}',
-                            color: Colors.black,
-                          ),
-                          Spacer(),
-                          SvgPicture.asset('assets/svgs/arrow.svg'),
-                        ],
+              ? GestureDetector(
+                onTap: () => _editPaymentCard(),
+                child: Column(
+                    children: [
+                      Divider(color: Colors.grey.shade300),
+                      Gap(20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/svgs/Mastercard.svg',
+                              width: 40,
+                            ),
+                            Gap(10),
+                            CustomText(
+                              text: 'Master Card Ending',
+                              color: Colors.black,
+                            ),
+                            Gap(10),
+                            CustomText(
+                              text:
+                                  '••••${_savedPaymentCard['number'].toString().substring(_savedPaymentCard['number'].length - 2)}',
+                              color: Colors.black,
+                            ),
+                            Spacer(),
+                            SvgPicture.asset('assets/svgs/arrow.svg'),
+                          ],
+                        ),
                       ),
-                    ),
-                    Gap(20),
-                    Divider(color: Colors.grey.shade300),
-                  ],
-                )
+                      Gap(20),
+                      Divider(color: Colors.grey.shade300),
+                    ],
+                  ),
+              )
               : GestureDetector(
                   onTap: () {
                     openPaymentCard();

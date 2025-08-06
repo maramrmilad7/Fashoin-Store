@@ -6,7 +6,8 @@ import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 
 class AddCardPage extends StatefulWidget {
-  const AddCardPage({super.key});
+  const AddCardPage({super.key, this.editData});
+  final dynamic editData;
   static String id = 'addCardPage';
 
   @override
@@ -60,21 +61,20 @@ class _AddCardPageState extends State<AddCardPage> {
             ),
           ),
         ),
-         bottomNavigationBar: GestureDetector(
+        bottomNavigationBar: GestureDetector(
           onTap: () {
-            if(_formKey.currentState!.validate()){
-               final data = {
-                          'number' : cardNumber,
-                          'name' : cardHolderName,
-                          'date' : expiryDate,
-                          'cvv' : cvvCode,
-                        };
+            if (_formKey.currentState!.validate()) {
+              final data = {
+                'number': cardNumber,
+                'name': cardHolderName,
+                'date': expiryDate,
+                'cvv': cvvCode,
+              };
 
-                        Navigator.pop(context,data);
-                      
+              Navigator.pop(context, data);
             }
           },
-      
+
           child: CheckOutBox(title: 'Add Cart'),
         ),
       ),
