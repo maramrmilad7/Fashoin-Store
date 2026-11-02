@@ -2,7 +2,7 @@
 import 'package:fashoinstore/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gap/flutter_gap.dart';
-import 'package:kmbal_ionicons/kmbal_ionicons.dart';
+import 'package:icons_flutter/icons_flutter.dart';
 
 class HomeFooter extends StatelessWidget {
   const HomeFooter({super.key});
