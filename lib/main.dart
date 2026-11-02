@@ -1,4 +1,3 @@
-import 'package:device_preview/device_preview.dart';
 import 'package:fashoinstore/pages/add_card_page.dart';
 import 'package:fashoinstore/pages/add_shipping_address.dart';
 import 'package:fashoinstore/pages/checkout_page.dart';
@@ -7,7 +6,7 @@ import 'package:fashoinstore/pages/place_order.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(DevicePreview(builder: (context) => FashoinApp()));
+  runApp(FashoinApp());
 }
 
 class FashoinApp extends StatelessWidget {
@@ -24,8 +23,6 @@ class FashoinApp extends StatelessWidget {
         'addShippingAddress': (context) => AddShippingAddress(),
         'addCardPage' : (context) => AddCardPage(),
       },
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
