@@ -83,6 +83,6 @@ Want to see it in action? Follow these steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/Fashoin-Store.git
+   git clone https://github.com/maramrmilad7/Fashoin-Store.git
 ## Figma link
 [figma_fashoin_store_design](https://www.figma.com/design/CGQpIVfb1nrXbZys9Iwus6/Open-Fashion---Free-eCommerce-UI-Kit--Community-?node-id=417-615&p=f&t=AAUAg2JTH758WFwB-0)
